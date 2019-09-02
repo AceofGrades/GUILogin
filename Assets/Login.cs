@@ -156,4 +156,25 @@ public class Login : MonoBehaviour
     {
         StartCoroutine(ForgotUser(email));
     }
+
+    IEnumerator UpdatePassword(InputField username, InputField password)
+    {
+        string updateURL = "http://localhost/nsi-rpg/updatepassword.php";
+        WWWForm form = new WWWForm();
+        form.AddField("username_Post", username.text);
+        form.AddField("password_Post", password.text);
+        UnityWebRequest updateRequest = UnityWebRequest.Post(updateURL, form);
+        yield return updateRequest.SendWebRequest();
+        Debug.Log(updateRequest.downloadHandler.text);
+
+        if (updateRequest.downloadHandler.text == "Password Changed")
+        {
+            Debug.Log(updateRequest.downloadHandler.text);
+        }
+    }
+
+    public void UpdatedPassword(InputField password)
+    {
+        StartCoroutine(UpdatePassword(username, password));
+    }
 }
