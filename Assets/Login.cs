@@ -64,7 +64,6 @@ public class Login : MonoBehaviour
         {
             SceneManager.LoadScene(1);
             loginSuccess = GetComponent<Text>();
-            loginSuccess.text = loginRequest.downloadHandler.text;
         }
         else
         {
